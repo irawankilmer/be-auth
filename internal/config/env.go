@@ -8,8 +8,6 @@ import (
 func LoadENV() {
 	err := godotenv.Load()
 	if err != nil {
-		log.Fatal("Load file .env gagal")
+		log.Fatal("Gagal membuka file .env")
 	}
-
-	log.Println("Load file .env berhasil")
 }
