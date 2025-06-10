@@ -7,7 +7,10 @@ import (
 )
 
 func AutoMigrate(db *gorm.DB) {
-	err := db.AutoMigrate(&model.User{})
+	err := db.AutoMigrate(
+		&model.User{},
+		&model.Role{},
+	)
 
 	if err != nil {
 		log.Fatalf("Migrasi database gagal %v", err.Error())
