@@ -12,9 +12,16 @@ func UserSeed(db *gorm.DB) {
 		panic(err)
 	}
 
-	var role model.Role
-	if err := db.Where("name = ?", "admin").First(&role).Error; err != nil {
+	var roles []*model.Role
+	roleNames := []string{"admin", "editor"}
+
+	var tempRoles []model.Role
+	if err := db.Where("name IN ?", roleNames).Find(&tempRoles).Error; err != nil {
 		panic(err)
+	}
+
+	for _, role := range tempRoles {
+		roles = append(roles, &role)
 	}
 
 	var user = model.User{
@@ -22,7 +29,7 @@ func UserSeed(db *gorm.DB) {
 		Username: "admin1",
 		Email:    "admin1@gmail.com",
 		Password: password,
-		Roles:    []*model.Role{&role},
+		Roles:    roles,
 	}
 
 	db.Create(&user)
