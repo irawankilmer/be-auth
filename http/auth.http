@@ -2,8 +2,8 @@ POST http://localhost:8080/api/login
 Content-Type: application/json
 
 {
-    "identifier": "coba",
-    "password": "123"
+    "identifier": "admin1",
+    "password": "admin1"
 }
 
 ###

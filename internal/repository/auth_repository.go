@@ -19,7 +19,10 @@ func NewAuthRepository(db *gorm.DB) AuthRepository {
 
 func (r *authRepository) CheckIdentifier(identifier string) (*model.User, error) {
 	var user model.User
-	err := r.db.Where("username = ? OR email = ?", identifier, identifier).First(&user).Error
+	err := r.db.
+		Preload("Roles").
+		Where("username = ? OR email = ?", identifier, identifier).
+		First(&user).Error
 
 	return &user, err
 }
