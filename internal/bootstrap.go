@@ -2,7 +2,8 @@ package internal
 
 import (
 	"be-blog/internal/config"
-	"be-blog/internal/migration"
+	"be-blog/internal/database/migration"
+	"be-blog/internal/database/seed"
 	"be-blog/internal/repository"
 	"be-blog/internal/service"
 	"os"
@@ -18,6 +19,7 @@ func InitApp() *AppContainer {
 
 	if os.Getenv("GIN_MODE") == "debug" {
 		migration.AutoMigrate(db)
+		seed.MainSeed(db)
 	}
 
 	authRepo := repository.NewAuthRepository(db)
