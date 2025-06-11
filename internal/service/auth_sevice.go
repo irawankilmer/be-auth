@@ -2,13 +2,13 @@ package service
 
 import (
 	"be-blog/internal/dto/request"
-	"be-blog/internal/model"
 	"be-blog/internal/repository"
+	"be-blog/pkg"
 	"errors"
 )
 
 type AuthService interface {
-	Login(req request.AuthRequest) (*model.User, error)
+	Login(req request.AuthRequest) (string, error)
 }
 
 type authService struct {
@@ -19,12 +19,19 @@ func NewAuthService(repo repository.AuthRepository) AuthService {
 	return &authService{repo}
 }
 
-func (s *authService) Login(req request.AuthRequest) (*model.User, error) {
+func (s *authService) Login(req request.AuthRequest) (string, error) {
 	user, err := s.repo.CheckIdentifier(req.Identifier)
 
-	if err != nil {
-		return user, errors.New("Email/Username tidak terdaftar!")
+	if err != nil || !pkg.CompareHash(user.Password, req.Password) {
+		return "", errors.New("Email/Username atau password salah!")
 	}
 
-	return user, err
+	var roleNames []string
+	for _, role := range user.Roles {
+		roleNames = append(roleNames, role.Name)
+	}
+
+	token, err := pkg.GenerateJWT(user.ID, roleNames)
+
+	return token, err
 }
