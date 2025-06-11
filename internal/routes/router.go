@@ -5,6 +5,7 @@ import (
 	"be-blog/internal/handler"
 	"be-blog/internal/middleware"
 	"github.com/gin-gonic/gin"
+	"net/http"
 )
 
 func InitRouter(r *gin.Engine, app *internal.AppContainer) {
@@ -13,4 +14,10 @@ func InitRouter(r *gin.Engine, app *internal.AppContainer) {
 	r.Use(middleware.CORSMiddleware())
 	api := r.Group("/api")
 	api.POST("/login", authHandler.Login)
+
+	// Route setelah ini harus memiliki authentication
+	api.Use(middleware.AuthMiddleware())
+	api.GET("/me", func(c *gin.Context) { // Coba saja
+		c.JSON(http.StatusOK, gin.H{"message": "Hello World"})
+	})
 }
