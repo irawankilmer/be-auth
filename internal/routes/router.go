@@ -17,7 +17,13 @@ func InitRouter(r *gin.Engine, app *internal.AppContainer) {
 
 	// Route setelah ini harus memiliki authentication
 	api.Use(middleware.AuthMiddleware())
-	api.GET("/me", func(c *gin.Context) { // Coba saja
+	api.GET("/me", func(c *gin.Context) { // Coba saja, nanti dihapus lagi
 		c.JSON(http.StatusOK, gin.H{"message": "Hello World"})
+	})
+
+	// Route setelah ini harus user dengan admin dan editor
+	api.Use(middleware.RoleMiddleware("admin", "editor"))
+	api.GET("/nulis", func(c *gin.Context) { // Coba saja, nanti dihapus lagi
+		c.JSON(http.StatusOK, gin.H{"message": "Selamat datang admin dan editor"})
 	})
 }

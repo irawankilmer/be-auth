@@ -79,8 +79,25 @@ func AuthMiddleware() gin.HandlerFunc {
 			return
 		}
 
+		// konversi claims["roles] ke []string
+		rolesInterface, ok := claims["roles"].([]interface{})
+		if !ok {
+			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "Format roles tidak valid dalam token"})
+			return
+		}
+
+		roles := make([]string, 0, len(rolesInterface))
+		for _, r := range rolesInterface {
+			roleStr, ok := r.(string)
+			if !ok {
+				c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "Role tidak valid, harus string"})
+				return
+			}
+			roles = append(roles, roleStr)
+		}
+
 		c.Set("user_id", uint(userID))
-		c.Set("roles", claims["roles"])
+		c.Set("roles", roles)
 		c.Next()
 	}
 }

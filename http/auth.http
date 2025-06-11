@@ -1,5 +1,5 @@
 GET http://localhost:8080/api/me
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDk3MTU4ODcsImlhdCI6MTc0OTYyOTQ4NywiaXNzIjoiYmxvZyIsInJvbGVzIjpbImFkbWluIiwiZWRpdG9yIl0sInRva2VuX3ZlcnNpb24iOiJiYjdlYzQ5Ni1lNDRjLTRlODAtYmNmOS0zZTE5MmQ3NGYwZGMiLCJ1c2VyX2lkIjoxfQ.lxvz-gDrJ2EcGgp25zBJ_IEzrGidvfba75kaMui3CYw
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDk3MTc5MDEsImlhdCI6MTc0OTYzMTUwMSwiaXNzIjoiYmxvZyIsInJvbGVzIjpbImFkbWluIiwiZWRpdG9yIl0sInRva2VuX3ZlcnNpb24iOiI3OGViMmY2YS04MDlkLTRlZGMtOGI2OC02YTk5MTA0NTQzYTQiLCJ1c2VyX2lkIjoxfQ.YP8WVmG28le-dOplsVlE-pZKPCriWIYbuhBw7BhL7d0
 ###
 POST http://localhost:8080/api/login
 Content-Type: application/json
@@ -9,4 +9,7 @@ Content-Type: application/json
     "password": "admin1"
 }
 
+###
+GET http://localhost:8080/api/nulis
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDk3MTc5MDEsImlhdCI6MTc0OTYzMTUwMSwiaXNzIjoiYmxvZyIsInJvbGVzIjpbImFkbWluIiwiZWRpdG9yIl0sInRva2VuX3ZlcnNpb24iOiI3OGViMmY2YS04MDlkLTRlZGMtOGI2OC02YTk5MTA0NTQzYTQiLCJ1c2VyX2lkIjoxfQ.YP8WVmG28le-dOplsVlE-pZKPCriWIYbuhBw7BhL7d0
 ###
