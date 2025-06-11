@@ -1,7 +1,7 @@
 ## Update
- - CORS Middleware
+ - **Token Version** -> ketika user sudah logout atau login ulang, maka token yang sebelumnya tidak valid lagi
+   - token_version diatur menggunakan uuid
 ## Target
  - middleware role
- - token_version(token sekali pakai jika user sudah logout atau login ulang)
  - rate limit
  - refresh token

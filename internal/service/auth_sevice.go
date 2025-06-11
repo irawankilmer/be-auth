@@ -31,7 +31,8 @@ func (s *authService) Login(req request.AuthRequest) (string, error) {
 		roleNames = append(roleNames, role.Name)
 	}
 
-	token, err := pkg.GenerateJWT(user.ID, roleNames)
+	var _ = s.repo.UpdateTokenVersion(user)
+	token, err := pkg.GenerateJWT(user.ID, roleNames, user.TokenVersion)
 
 	return token, err
 }
