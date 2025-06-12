@@ -1,8 +1,18 @@
 package model
 
+import (
+	"be-blog/pkg/idgen"
+	"gorm.io/gorm"
+)
+
 type Role struct {
-	ID    uint    `gorm:"primaryKey"`
+	ID    string  `gorm:"primaryKey;size:26"`
 	Name  string  `gorm:"uniqueIndex;not null"`
 	Users []*User `gorm:"many2many:user_roles;"`
 	TimeStamps
+}
+
+func (u *Role) BeforeCreate(tx *gorm.DB) (err error) {
+	u.ID = idgen.NewULID()
+	return
 }

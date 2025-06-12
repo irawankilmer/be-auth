@@ -20,8 +20,8 @@ func UserSeed(db *gorm.DB) {
 		panic(err)
 	}
 
-	for _, role := range tempRoles {
-		roles = append(roles, &role)
+	for i := range tempRoles {
+		roles = append(roles, &tempRoles[i])
 	}
 
 	var user = model.User{
@@ -32,5 +32,6 @@ func UserSeed(db *gorm.DB) {
 		Roles:    roles,
 	}
 
-	db.Create(&user)
+	db.Omit("Roles.*").Create(&user)
+	db.Model(&user).Association("Roles").Replace(roles)
 }

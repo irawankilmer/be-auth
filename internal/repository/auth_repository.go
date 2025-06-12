@@ -32,5 +32,7 @@ func (r *authRepository) CheckIdentifier(identifier string) (*model.User, error)
 func (r *authRepository) UpdateTokenVersion(user *model.User) error {
 	newTokenVersion := uuid.New().String()
 	user.TokenVersion = newTokenVersion
-	return r.db.Save(user).Error
+	return r.db.Model(&model.User{}).
+		Where("id = ?", user.ID).
+		Update("token_version", newTokenVersion).Error
 }

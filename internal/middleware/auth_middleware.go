@@ -55,7 +55,7 @@ func AuthMiddleware() gin.HandlerFunc {
 			return
 		}
 
-		userID, ok := claims["user_id"].(float64)
+		userID, ok := claims["user_id"].(string)
 		if !ok {
 			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "Token tidak memiliki identitas pengguna (user_id)"})
 			return
@@ -69,7 +69,7 @@ func AuthMiddleware() gin.HandlerFunc {
 
 		var user model.User
 		db := config.DB
-		if err := db.First(&user, uint(userID)).Error; err != nil {
+		if err := db.First(&user, "id = ?", userID).Error; err != nil {
 			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "User tidak ditemukan!"})
 			return
 		}
@@ -96,7 +96,7 @@ func AuthMiddleware() gin.HandlerFunc {
 			roles = append(roles, roleStr)
 		}
 
-		c.Set("user_id", uint(userID))
+		c.Set("user_id", userID)
 		c.Set("roles", roles)
 		c.Next()
 	}

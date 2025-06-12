@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-func GenerateJWT(userID uint, roles []string, tokenVersion string) (string, error) {
+func GenerateJWT(userID string, roles []string, tokenVersion string) (string, error) {
 	now := time.Now()
 	claims := jwt.MapClaims{
 		"user_id":       userID,
