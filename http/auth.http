@@ -5,7 +5,7 @@ POST http://localhost:8080/api/login
 Content-Type: application/json
 
 {
-    "password": "superadmin1"
+    "identifier": "Komang leak"
 }
 
 ###

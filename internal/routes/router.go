@@ -4,12 +4,16 @@ import (
 	"be-blog/internal"
 	"be-blog/internal/handler"
 	"be-blog/internal/middleware"
+	validates2 "be-blog/pkg/validates"
 	"github.com/gin-gonic/gin"
+	"github.com/go-playground/validator/v10"
 	"net/http"
 )
 
 func InitRouter(r *gin.Engine, app *internal.AppContainer) {
-	authHandler := handler.NewAuthHandler(app.AuthService)
+	v := validator.New()
+	validates := validates2.NewValidates(v)
+	authHandler := handler.NewAuthHandler(app.AuthService, validates)
 
 	r.Use(middleware.CORSMiddleware())
 	api := r.Group("/api")

@@ -12,13 +12,8 @@ type APIResponse struct {
 	Status  Status      `json:"status"`
 	Message string      `json:"message"`
 	Data    interface{} `json:"data,omitempty"`
-	Errors  []ErrorItem `json:"errors,omitempty"`
+	Errors  interface{} `json:"errors,omitempty"`
 	Meta    MetaData    `json:"meta,omitempty"`
-}
-
-type ErrorItem struct {
-	Field   string `json:"field,omitempty"`
-	Message string `json:"message"`
 }
 
 type MetaData struct {

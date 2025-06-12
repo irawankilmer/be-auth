@@ -4,21 +4,25 @@ import (
 	"be-blog/internal/dto/request"
 	"be-blog/internal/service"
 	"be-blog/pkg/response"
+	"be-blog/pkg/validates"
 	"github.com/gin-gonic/gin"
 )
 
 type AuthHandler struct {
-	service service.AuthService
+	service   service.AuthService
+	Validator *validates.Validates
 }
 
-func NewAuthHandler(s service.AuthService) *AuthHandler {
-	return &AuthHandler{s}
+func NewAuthHandler(s service.AuthService, v *validates.Validates) *AuthHandler {
+	return &AuthHandler{
+		service:   s,
+		Validator: v,
+	}
 }
 
 func (h *AuthHandler) Login(c *gin.Context) {
 	var req request.AuthRequest
-	if err := c.ShouldBindJSON(&req); err != nil {
-		response.BadRequest(c, nil, "Gagal validasi input")
+	if !h.Validator.ValidateJSON(c, &req) {
 		return
 	}
 

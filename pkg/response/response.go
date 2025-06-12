@@ -33,7 +33,7 @@ func NoContent(c *gin.Context) {
 	c.Status(http.StatusNoContent)
 }
 
-func BadRequest(c *gin.Context, errors []ErrorItem, message string) {
+func BadRequest(c *gin.Context, errors interface{}, message string) {
 	c.JSON(http.StatusBadRequest, APIResponse{
 		Code:    http.StatusBadRequest,
 		Status:  StatusError,
