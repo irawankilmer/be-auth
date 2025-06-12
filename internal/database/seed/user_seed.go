@@ -7,13 +7,13 @@ import (
 )
 
 func UserSeed(db *gorm.DB) {
-	password, err := pkg.GenerateHash("admin1")
+	password, err := pkg.GenerateHash("superadmin1")
 	if err != nil {
 		panic(err)
 	}
 
 	var roles []*model.Role
-	roleNames := []string{"admin", "editor"}
+	roleNames := []string{"super admin", "admin", "penulis", "editor"}
 
 	var tempRoles []model.Role
 	if err := db.Where("name IN ?", roleNames).Find(&tempRoles).Error; err != nil {
@@ -25,9 +25,9 @@ func UserSeed(db *gorm.DB) {
 	}
 
 	var user = model.User{
-		FullName: "Admin Pertama",
-		Username: "admin1",
-		Email:    "admin1@gmail.com",
+		FullName: "Super Admin 1",
+		Username: "superadmin1",
+		Email:    "superadmin1@gmail.com",
 		Password: password,
 		Roles:    roles,
 	}

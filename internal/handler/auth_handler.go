@@ -3,8 +3,8 @@ package handler
 import (
 	"be-blog/internal/dto/request"
 	"be-blog/internal/service"
+	"be-blog/pkg/response"
 	"github.com/gin-gonic/gin"
-	"net/http"
 )
 
 type AuthHandler struct {
@@ -18,20 +18,15 @@ func NewAuthHandler(s service.AuthService) *AuthHandler {
 func (h *AuthHandler) Login(c *gin.Context) {
 	var req request.AuthRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
-		c.JSON(http.StatusNotFound, gin.H{
-			"error": err.Error(),
-		})
+		response.BadRequest(c, nil, "Gagal validasi input")
+		return
 	}
 
 	token, err := h.service.Login(req)
 	if err != nil {
-		c.JSON(http.StatusNotFound, gin.H{
-			"error": err.Error(),
-		})
+		response.NotFound(c, err.Error())
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{
-		"token": token,
-	})
+	response.OK(c, token, "Anda berhasil login", nil)
 }

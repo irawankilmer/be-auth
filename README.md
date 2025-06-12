@@ -1,5 +1,5 @@
 ## Update
- - **ULID** Ganti id auto increments jadi ULID agar lebih aman dan tidak terlalu panjang seperti UUID
+ - **Response** Perbaikan response jadi lebih rapi dan terstruktur
 ## Target
  - rate limit
  - refresh token
