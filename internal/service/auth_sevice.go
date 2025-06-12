@@ -9,6 +9,7 @@ import (
 
 type AuthService interface {
 	Login(req request.AuthRequest) (string, error)
+	Logout(userID string) error
 }
 
 type authService struct {
@@ -35,4 +36,13 @@ func (s *authService) Login(req request.AuthRequest) (string, error) {
 	token, err := pkg.GenerateJWT(user.ID, roleNames, user.TokenVersion)
 
 	return token, err
+}
+
+func (s *authService) Logout(userID string) error {
+	user, err := s.repo.FindByID(userID)
+	if err != nil {
+		return err
+	}
+
+	return s.repo.UpdateTokenVersion(user)
 }

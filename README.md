@@ -1,7 +1,6 @@
 ## Update
- - Menambahkan sistem validasi
- - Perbaiki response dihubungkan dengan validasi
- - Old data diatur dengan Sanitize, untuk menghindari expose data sensitive
+ - Menambahkan sistem logout
+ - Mencegah token agar tidak bisa diakses lagi setelah logout atau login ulang
 ## Target Berikutnya
  - tangani data gagal ditemukan kedalam sistem validasi
  - rate limit

@@ -21,6 +21,8 @@ func InitRouter(r *gin.Engine, app *internal.AppContainer) {
 
 	// Route setelah ini harus memiliki authentication
 	api.Use(middleware.AuthMiddleware())
+	api.POST("/logout", authHandler.Logout)
+
 	api.GET("/me", func(c *gin.Context) { // Coba saja, nanti dihapus lagi
 		c.JSON(http.StatusOK, gin.H{"message": "Hello World"})
 	})
