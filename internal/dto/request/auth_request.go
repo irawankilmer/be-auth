@@ -11,14 +11,14 @@ func (a *AuthRequest) Sanitize() map[string]any {
 	}
 }
 
-type GuestRegister struct {
+type GuestRegisterRequest struct {
 	FullName string `json:"full_name" binding:"required"`
 	Username string `json:"username" binding:"required"`
 	Email    string `json:"email" binding:"required"`
 	Password string `json:"password" binding:"required,min=6"`
 }
 
-func (a *GuestRegister) Sanitize() map[string]any {
+func (a *GuestRegisterRequest) Sanitize() map[string]any {
 	return map[string]any{
 		"full_name": a.FullName,
 		"username":  a.Username,

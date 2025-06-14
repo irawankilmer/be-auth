@@ -5,8 +5,6 @@ import (
 	"errors"
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"
-	"reflect"
-	"strings"
 )
 
 type Validates struct {
@@ -17,6 +15,7 @@ func NewValidates(v *validator.Validate) *Validates {
 	return &Validates{validator: v}
 }
 
+// Ambil old data
 type Sanitizable interface {
 	Sanitize() map[string]any
 }
@@ -48,33 +47,16 @@ func (vu *Validates) ValidateJSON(c *gin.Context, input any) bool {
 	return true
 }
 
-func getJSONFieldName(input any, field string) string {
-	t := reflect.TypeOf(input)
-	if t.Kind() == reflect.Ptr {
-		t = t.Elem()
-	}
-	if t.Kind() == reflect.Slice {
-		t = t.Elem()
-	}
-	if t.Kind() != reflect.Struct {
-		return field
+// Validasi username/email dan lain sebagainya
+func (vu *Validates) ValidateBussiness(c *gin.Context, input Sanitizable, FieldErrors map[string]string) bool {
+	if len(FieldErrors) == 0 {
+		return true
 	}
 
-	if f, ok := t.FieldByName(field); ok {
-		jsonTag := f.Tag.Get("json")
-		return strings.Split(jsonTag, ",")[0]
-	}
+	response.BadRequest(c, gin.H{
+		"errors": FieldErrors,
+		"old":    input.Sanitize(),
+	}, "validasi gagal")
 
-	return field
-}
-
-func buildValidationErrorMap(input any, verr validator.ValidationErrors) map[string]string {
-	errorMessages := make(map[string]string)
-	for _, e := range verr {
-		field := getJSONFieldName(input, e.Field())
-		msg := GetValidationMessage(field, e.Tag(), e.Param())
-		errorMessages[field] = msg
-	}
-
-	return errorMessages
+	return false
 }

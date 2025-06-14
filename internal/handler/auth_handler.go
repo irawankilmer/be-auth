@@ -57,10 +57,25 @@ func (h *AuthHandler) Logout(c *gin.Context) {
 }
 
 func (h *AuthHandler) RegisterGuest(c *gin.Context) {
-	var req request.GuestRegister
+	var req request.GuestRegisterRequest
 
 	// Validasi input
 	if !h.Validator.ValidateJSON(c, &req) {
+		return
+	}
+
+	// Validasi bussines login
+	fieldErrors := make(map[string]string)
+
+	if h.service.IsUsernameTaken(req.Username) {
+		fieldErrors["username"] = "Username sudah terdaftar"
+	}
+
+	if h.service.IsEmailTaken(req.Email) {
+		fieldErrors["email"] = "Email sudah terdaftar"
+	}
+
+	if !h.Validator.ValidateBussiness(c, &req, fieldErrors) {
 		return
 	}
 

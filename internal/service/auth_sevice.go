@@ -11,7 +11,9 @@ import (
 type AuthService interface {
 	Login(req request.AuthRequest) (string, error)
 	Logout(userID string) error
-	RegisterGuest(req request.GuestRegister) error
+	RegisterGuest(req request.GuestRegisterRequest) error
+	IsUsernameTaken(username string) bool
+	IsEmailTaken(username string) bool
 }
 
 type authService struct {
@@ -49,7 +51,7 @@ func (s *authService) Logout(userID string) error {
 	return s.repo.UpdateTokenVersion(user)
 }
 
-func (s *authService) RegisterGuest(req request.GuestRegister) error {
+func (s *authService) RegisterGuest(req request.GuestRegisterRequest) error {
 	exists, err := s.repo.IsUsernameExists(req.Username)
 	if err != nil {
 		return err
@@ -90,4 +92,14 @@ func (s *authService) RegisterGuest(req request.GuestRegister) error {
 	}
 
 	return nil
+}
+
+func (s *authService) IsUsernameTaken(username string) bool {
+	exists, _ := s.repo.IsUsernameExists(username)
+	return exists
+}
+
+func (s *authService) IsEmailTaken(email string) bool {
+	exists, _ := s.repo.IsEmailExists(email)
+	return exists
 }
