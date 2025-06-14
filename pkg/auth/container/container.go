@@ -1,9 +1,9 @@
 package container
 
 import (
-	"github.com/irawankilmer/be-auth/internal/config"
-	"github.com/irawankilmer/be-auth/internal/database/migration"
-	"github.com/irawankilmer/be-auth/internal/database/seed"
+	"github.com/irawankilmer/be-auth/pkg/auth/config"
+	"github.com/irawankilmer/be-auth/pkg/auth/database/migration"
+	"github.com/irawankilmer/be-auth/pkg/auth/database/seed"
 	"github.com/irawankilmer/be-auth/pkg/auth/repository"
 	"github.com/irawankilmer/be-auth/pkg/auth/service"
 	"os"

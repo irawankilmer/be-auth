@@ -2,7 +2,7 @@
 
 ### Install
 ```bash
-go get github.com/irawankilmer/be-auth@v1.0.0
+go get github.com/irawankilmer/be-auth@v1.0.3
 ```
 
 ### Penggunaan

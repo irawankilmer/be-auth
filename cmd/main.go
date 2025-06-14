@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"github.com/irawankilmer/be-auth/internal/config"
+	"github.com/irawankilmer/be-auth/pkg/auth/config"
 	"github.com/irawankilmer/be-auth/pkg/auth/container"
 	"github.com/irawankilmer/be-auth/pkg/auth/routes"
 	"os"
