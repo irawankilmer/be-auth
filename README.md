@@ -8,12 +8,21 @@ go get github.com/irawankilmer/be-auth@v1.0.0
 ### Penggunaan
 Di main
 ```go
-// 1. Init App (load DB, service, repo, dll)
-app := bootstrap.InitApp()
+	config.LoadENV()
+	if os.Getenv("GIN_MODE") == "release" {
+		gin.SetMode(gin.ReleaseMode)
+	}
 
-// Setup Router
-router := gin.Default()
+	r := gin.Default()
 
-// Register Routes
-authRoutes.RegisterAuthRoutes(router, app.AuthService)
+	app := container.InitApp()
+	routes.InitRouter(r, app)
+
+	port := os.Getenv("APP_PORT")
+	fmt.Println(port)
+	if port == "" {
+		port = "8080"
+	}
+
+	r.Run(":" + port)
 ```
