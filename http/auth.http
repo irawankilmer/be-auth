@@ -18,3 +18,14 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDk4Mjg4N
 GET http://localhost:8080/api/nulis
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDk4Mjg4NTMsImlhdCI6MTc0OTc0MjQ1MywiaXNzIjoiYmxvZyIsInJvbGVzIjpbImFkbWluIiwic3VwZXIgYWRtaW4iLCJlZGl0b3IiLCJwZW51bGlzIl0sInRva2VuX3ZlcnNpb24iOiJiNjkwNjJhZC0yZTFkLTQ0N2MtODYzOS0xYjUxOTg0ZmU2NjMiLCJ1c2VyX2lkIjoiMDFKWEoyQzYwVjFOMDQ1WVMwMUNRRTFKVDQifQ.GIjiX5DlJ0vHnmpBhC-aOlByMHrn_JgzBiBQzjT40FI
 ###
+
+### Registrasi Tamu
+POST http://localhost:8080/api/guest-register
+Content-Type: application/json
+
+{
+    "full_name": "Tamu ke dua",
+    "username": "tamu2",
+    "email": "tamu2@gmail.com",
+    "password": "tamu123"
+}

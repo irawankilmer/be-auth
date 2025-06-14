@@ -2,6 +2,7 @@ package service
 
 import (
 	"be-blog/internal/dto/request"
+	"be-blog/internal/model"
 	"be-blog/internal/repository"
 	"be-blog/pkg"
 	"errors"
@@ -10,6 +11,7 @@ import (
 type AuthService interface {
 	Login(req request.AuthRequest) (string, error)
 	Logout(userID string) error
+	RegisterGuest(req request.GuestRegister) error
 }
 
 type authService struct {
@@ -45,4 +47,47 @@ func (s *authService) Logout(userID string) error {
 	}
 
 	return s.repo.UpdateTokenVersion(user)
+}
+
+func (s *authService) RegisterGuest(req request.GuestRegister) error {
+	exists, err := s.repo.IsUsernameExists(req.Username)
+	if err != nil {
+		return err
+	}
+	if exists {
+		return errors.New("username sudah digunakan")
+	}
+
+	exists, err = s.repo.IsEmailExists(req.Email)
+	if err != nil {
+		return err
+	}
+	if exists {
+		return errors.New("email sudah digunakan")
+	}
+
+	hashedPassword, err := pkg.GenerateHash(req.Password)
+	if err != nil {
+		return errors.New("gagal enkripsi password")
+	}
+
+	// Ambil role tamu
+	role, err := s.repo.GetRoleByNames("tamu")
+	if err != nil {
+		return errors.New("role 'tamu' tidak ditemukan")
+	}
+
+	user := &model.User{
+		FullName: req.FullName,
+		Username: req.Username,
+		Email:    req.Email,
+		Password: hashedPassword,
+	}
+
+	// Buat user
+	if err := s.repo.CreateGuestUser(user, role); err != nil {
+		return err
+	}
+
+	return nil
 }

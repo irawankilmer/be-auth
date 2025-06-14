@@ -18,6 +18,7 @@ func InitRouter(r *gin.Engine, app *internal.AppContainer) {
 	r.Use(middleware.CORSMiddleware())
 	api := r.Group("/api")
 	api.POST("/login", authHandler.Login)
+	api.POST("/guest-register", authHandler.RegisterGuest)
 
 	// Route setelah ini harus memiliki authentication
 	api.Use(middleware.AuthMiddleware())

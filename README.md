@@ -1,6 +1,5 @@
 ## Update
- - Menambahkan sistem logout
- - Mencegah token agar tidak bisa diakses lagi setelah logout atau login ulang
+ - Menambahkan sistem registrasi tamu (role otomatis di relasikan dengan tamu)
 ## Target Berikutnya
  - tangani data gagal ditemukan kedalam sistem validasi
  - rate limit

@@ -6,9 +6,8 @@ import (
 )
 
 type Role struct {
-	ID    string  `gorm:"primaryKey;size:26"`
-	Name  string  `gorm:"uniqueIndex;not null"`
-	Users []*User `gorm:"many2many:user_roles;"`
+	ID   string `gorm:"primaryKey;size:26"`
+	Name string `gorm:"uniqueIndex;not null"`
 	TimeStamps
 }
 

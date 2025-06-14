@@ -11,6 +11,7 @@ func RoleSeed(db *gorm.DB) {
 		{Name: "admin"},
 		{Name: "penulis"},
 		{Name: "editor"},
+		{Name: "tamu"},
 	}
 
 	db.Create(role)

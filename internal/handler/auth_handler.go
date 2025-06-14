@@ -55,3 +55,20 @@ func (h *AuthHandler) Logout(c *gin.Context) {
 
 	response.OK(c, nil, "Logout berhasil", nil)
 }
+
+func (h *AuthHandler) RegisterGuest(c *gin.Context) {
+	var req request.GuestRegister
+
+	// Validasi input
+	if !h.Validator.ValidateJSON(c, &req) {
+		return
+	}
+
+	// Buat user tamu baru
+	if err := h.service.RegisterGuest(req); err != nil {
+		response.BadRequest(c, err.Error(), "user tamu gagal dibuat")
+		return
+	}
+
+	response.Created(c, nil, "user tamu berhasil dibuat")
+}

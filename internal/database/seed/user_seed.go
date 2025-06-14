@@ -33,5 +33,5 @@ func UserSeed(db *gorm.DB) {
 	}
 
 	db.Omit("Roles.*").Create(&user)
-	db.Model(&user).Association("Roles").Replace(roles)
+	_ = db.Model(&user).Association("Roles").Replace(roles)
 }
