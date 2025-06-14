@@ -1,10 +1,10 @@
 package validates
 
 import (
-	"be-blog/pkg/response"
 	"errors"
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"
+	"github.com/irawankilmer/be-auth/pkg/response"
 )
 
 type Validates struct {

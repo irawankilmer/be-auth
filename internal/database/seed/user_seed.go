@@ -1,8 +1,8 @@
 package seed
 
 import (
-	"be-blog/internal/model"
-	"be-blog/pkg"
+	"github.com/irawankilmer/be-auth/pkg"
+	model2 "github.com/irawankilmer/be-auth/pkg/auth/model"
 	"gorm.io/gorm"
 )
 
@@ -12,10 +12,10 @@ func UserSeed(db *gorm.DB) {
 		panic(err)
 	}
 
-	var roles []*model.Role
+	var roles []*model2.Role
 	roleNames := []string{"super admin", "admin", "penulis", "editor"}
 
-	var tempRoles []model.Role
+	var tempRoles []model2.Role
 	if err := db.Where("name IN ?", roleNames).Find(&tempRoles).Error; err != nil {
 		panic(err)
 	}
@@ -24,7 +24,7 @@ func UserSeed(db *gorm.DB) {
 		roles = append(roles, &tempRoles[i])
 	}
 
-	var user = model.User{
+	var user = model2.User{
 		FullName: "Super Admin 1",
 		Username: "superadmin1",
 		Email:    "superadmin1@gmail.com",

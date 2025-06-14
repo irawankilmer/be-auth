@@ -1,15 +1,15 @@
 package migration
 
 import (
-	"be-blog/internal/model"
+	model2 "github.com/irawankilmer/be-auth/pkg/auth/model"
 	"gorm.io/gorm"
 	"log"
 )
 
 func AutoMigrate(db *gorm.DB) {
 	err := db.AutoMigrate(
-		&model.User{},
-		&model.Role{},
+		&model2.User{},
+		&model2.Role{},
 	)
 
 	if err != nil {

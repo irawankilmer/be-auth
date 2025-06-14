@@ -1,5 +1,6 @@
-## Update
- - Menangani username dan email yang sudah terdaftar kedalam sistem validasi
-## Target Berikutnya
- - rate limit
- - refresh token
+## BE Auth
+
+### Install
+```bash
+go get github.com/irawankilmer/be-auth@v1.0.0
+```

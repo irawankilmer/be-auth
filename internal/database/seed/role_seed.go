@@ -1,7 +1,7 @@
 package seed
 
 import (
-	"be-blog/internal/model"
+	"github.com/irawankilmer/be-auth/pkg/auth/model"
 	"gorm.io/gorm"
 )
 

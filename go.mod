@@ -1,4 +1,4 @@
-module be-blog
+module github.com/irawankilmer/be-auth
 
 go 1.24.3
 

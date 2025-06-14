@@ -1,11 +1,11 @@
 package main
 
 import (
-	"be-blog/internal"
-	"be-blog/internal/config"
-	"be-blog/internal/routes"
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"github.com/irawankilmer/be-auth/internal/config"
+	"github.com/irawankilmer/be-auth/internal/container"
+	"github.com/irawankilmer/be-auth/pkg/auth/routes"
 	"os"
 )
 
@@ -17,7 +17,7 @@ func main() {
 
 	r := gin.Default()
 
-	app := internal.InitApp()
+	app := container.InitApp()
 	routes.InitRouter(r, app)
 
 	port := os.Getenv("APP_PORT")

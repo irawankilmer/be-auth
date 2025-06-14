@@ -1,11 +1,11 @@
 package handler
 
 import (
-	"be-blog/internal/dto/request"
-	"be-blog/internal/service"
-	"be-blog/pkg/response"
-	"be-blog/pkg/validates"
 	"github.com/gin-gonic/gin"
+	"github.com/irawankilmer/be-auth/pkg/auth/dto/request"
+	"github.com/irawankilmer/be-auth/pkg/auth/service"
+	"github.com/irawankilmer/be-auth/pkg/response"
+	"github.com/irawankilmer/be-auth/pkg/validates"
 )
 
 type AuthHandler struct {

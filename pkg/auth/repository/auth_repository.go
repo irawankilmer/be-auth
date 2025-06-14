@@ -1,19 +1,19 @@
 package repository
 
 import (
-	"be-blog/internal/model"
 	"github.com/google/uuid"
+	model2 "github.com/irawankilmer/be-auth/pkg/auth/model"
 	"gorm.io/gorm"
 )
 
 type AuthRepository interface {
-	CheckIdentifier(identifier string) (*model.User, error)
-	UpdateTokenVersion(user *model.User) error
-	FindByID(id string) (*model.User, error)
+	CheckIdentifier(identifier string) (*model2.User, error)
+	UpdateTokenVersion(user *model2.User) error
+	FindByID(id string) (*model2.User, error)
 	IsUsernameExists(username string) (bool, error)
 	IsEmailExists(email string) (bool, error)
-	GetRoleByNames(name string) (*model.Role, error)
-	CreateGuestUser(user *model.User, role *model.Role) error
+	GetRoleByNames(name string) (*model2.Role, error)
+	CreateGuestUser(user *model2.User, role *model2.Role) error
 }
 
 type authRepository struct {
@@ -24,8 +24,8 @@ func NewAuthRepository(db *gorm.DB) AuthRepository {
 	return &authRepository{db}
 }
 
-func (r *authRepository) CheckIdentifier(identifier string) (*model.User, error) {
-	var user model.User
+func (r *authRepository) CheckIdentifier(identifier string) (*model2.User, error) {
+	var user model2.User
 	err := r.db.
 		Preload("Roles").
 		Where("username = ? OR email = ?", identifier, identifier).
@@ -34,8 +34,8 @@ func (r *authRepository) CheckIdentifier(identifier string) (*model.User, error)
 	return &user, err
 }
 
-func (r *authRepository) FindByID(id string) (*model.User, error) {
-	var user model.User
+func (r *authRepository) FindByID(id string) (*model2.User, error) {
+	var user model2.User
 	if err := r.db.First(&user, "id = ?", id).Error; err != nil {
 		return nil, err
 	}
@@ -43,16 +43,16 @@ func (r *authRepository) FindByID(id string) (*model.User, error) {
 	return &user, nil
 }
 
-func (r *authRepository) UpdateTokenVersion(user *model.User) error {
+func (r *authRepository) UpdateTokenVersion(user *model2.User) error {
 	newTokenVersion := uuid.New().String()
 	user.TokenVersion = newTokenVersion
-	return r.db.Model(&model.User{}).
+	return r.db.Model(&model2.User{}).
 		Where("id = ?", user.ID).
 		Update("token_version", newTokenVersion).Error
 }
 
 func (r *authRepository) IsUsernameExists(username string) (bool, error) {
-	var user model.User
+	var user model2.User
 	err := r.db.Where("username = ?", username).First(&user).Error
 	if err == nil {
 		return true, nil
@@ -64,7 +64,7 @@ func (r *authRepository) IsUsernameExists(username string) (bool, error) {
 }
 
 func (r *authRepository) IsEmailExists(email string) (bool, error) {
-	var user model.User
+	var user model2.User
 	err := r.db.Where("email = ?", email).First(&user).Error
 	if err == nil {
 		return true, err
@@ -75,8 +75,8 @@ func (r *authRepository) IsEmailExists(email string) (bool, error) {
 	return false, err
 }
 
-func (r *authRepository) GetRoleByNames(name string) (*model.Role, error) {
-	var role model.Role
+func (r *authRepository) GetRoleByNames(name string) (*model2.Role, error) {
+	var role model2.Role
 	err := r.db.Where("name = ?", name).First(&role).Error
 	if err == nil {
 		return nil, err
@@ -84,7 +84,7 @@ func (r *authRepository) GetRoleByNames(name string) (*model.Role, error) {
 	return &role, nil
 }
 
-func (r *authRepository) CreateGuestUser(user *model.User, role *model.Role) error {
+func (r *authRepository) CreateGuestUser(user *model2.User, role *model2.Role) error {
 	if err := r.db.Create(user).Error; err != nil {
 		return err
 	}

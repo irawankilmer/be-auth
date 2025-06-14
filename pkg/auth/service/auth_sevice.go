@@ -1,11 +1,11 @@
 package service
 
 import (
-	"be-blog/internal/dto/request"
-	"be-blog/internal/model"
-	"be-blog/internal/repository"
-	"be-blog/pkg"
 	"errors"
+	"github.com/irawankilmer/be-auth/pkg"
+	"github.com/irawankilmer/be-auth/pkg/auth/dto/request"
+	"github.com/irawankilmer/be-auth/pkg/auth/model"
+	"github.com/irawankilmer/be-auth/pkg/auth/repository"
 )
 
 type AuthService interface {

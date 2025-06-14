@@ -1,7 +1,7 @@
 package model
 
 import (
-	"be-blog/pkg/idgen"
+	"github.com/irawankilmer/be-auth/pkg/idgen"
 	"gorm.io/gorm"
 )
 

@@ -1,10 +1,10 @@
 package middleware
 
 import (
-	"be-blog/internal/config"
-	"be-blog/internal/model"
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt/v5"
+	"github.com/irawankilmer/be-auth/internal/config"
+	"github.com/irawankilmer/be-auth/pkg/auth/model"
 	"net/http"
 	"os"
 	"strings"

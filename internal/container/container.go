@@ -1,11 +1,11 @@
-package internal
+package container
 
 import (
-	"be-blog/internal/config"
-	"be-blog/internal/database/migration"
-	"be-blog/internal/database/seed"
-	"be-blog/internal/repository"
-	"be-blog/internal/service"
+	"github.com/irawankilmer/be-auth/internal/config"
+	"github.com/irawankilmer/be-auth/internal/database/migration"
+	"github.com/irawankilmer/be-auth/internal/database/seed"
+	"github.com/irawankilmer/be-auth/pkg/auth/repository"
+	"github.com/irawankilmer/be-auth/pkg/auth/service"
 	"os"
 )
 
