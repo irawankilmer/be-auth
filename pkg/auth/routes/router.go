@@ -3,7 +3,7 @@ package routes
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"
-	"github.com/irawankilmer/be-auth/internal/container"
+	"github.com/irawankilmer/be-auth/pkg/auth/container"
 	"github.com/irawankilmer/be-auth/pkg/auth/handler"
 	middleware2 "github.com/irawankilmer/be-auth/pkg/auth/middleware"
 	validates2 "github.com/irawankilmer/be-auth/pkg/validates"

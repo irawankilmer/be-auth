@@ -25,7 +25,7 @@ Content-Type: application/json
 
 {
     "full_name": "Tamu ke dua",
-    "username": "tamu3",
-    "email": "tamu3@gmail.com",
+    "username": "tamu1",
+    "email": "tamu1@gmail.com",
     "password": "tamu123"
 }
